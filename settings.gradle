@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "CircularProgressView"
 include ':app'
 include ':circularporgressview'
+include ':sample'
