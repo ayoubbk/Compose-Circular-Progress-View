@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.bks.circularporgressview.ui.theme.blue
 import com.bks.circularporgressview.ui.theme.light_blue
 
+
+
 @Composable
 fun drawInfiniteProgressView(
     modifier: Modifier = Modifier,
@@ -80,7 +82,7 @@ fun drawInfiniteProgressView(
             useCenter = false,
             topLeft = topLeft,
             size = size,
-            style = stroke
+            style = stroke,
         )
     }
 }

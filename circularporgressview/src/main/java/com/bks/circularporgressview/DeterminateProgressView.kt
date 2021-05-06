@@ -18,6 +18,19 @@ import androidx.compose.ui.unit.dp
 import com.bks.circularporgressview.ui.theme.blue
 import com.bks.circularporgressview.ui.theme.light_blue
 
+/**
+ * A determinate circular progress that represents progress by drawing an arc from 0.0
+ * to 360.0 degrees
+ *
+ * @param progressColor The color of the progress
+ * @param progressBackgroundColor The background color of the progress
+ * @param strokeWidth The progress stroke width
+ * @param strokeBackgroundWidth The progress background stroke width
+ * @param progress The progress value, float range from 0.0 to 100.0
+ * @param progressDirection The progress direction
+ * @param roundedBorder Determine whether the progress border is rounded or squared
+ *
+ */
 @Composable
 fun drawDeterminateProgressView(
     modifier: Modifier = Modifier,
@@ -25,7 +38,7 @@ fun drawDeterminateProgressView(
     progressBackgroundColor: Color = light_blue,
     strokeWidth: Dp = 10.dp,
     strokeBackgroundWidth: Dp = 5.dp,
-    progress: Float = 320f,
+    progress: Float = 90f,
     progressDirection: AnimationDirection = AnimationDirection.RIGHT,
     roundedBorder: Boolean = true,
     durationInMilliSecond: Int = 2000,
@@ -46,7 +59,7 @@ fun drawDeterminateProgressView(
     }
     val transition = updateTransition(currentState)
 
-    val sweepAngle by transition.animateFloat(
+    val progress by transition.animateFloat(
         transitionSpec = {
             tween(
                 durationMillis = durationInMilliSecond,
@@ -80,6 +93,7 @@ fun drawDeterminateProgressView(
             halfSize.height - radius
         )
         val size = Size(radius * 2, radius * 2)
+        val sweep = progress * 360 / 100
 
         drawArc(
             startAngle = 0f,
@@ -94,14 +108,15 @@ fun drawDeterminateProgressView(
         drawArc(
             color = progressColor,
             startAngle = 270f,
-            sweepAngle = sweepAngle,
+            sweepAngle = sweep,
             useCenter = false,
             topLeft = topLeft,
             size = size,
             style = stroke
         )
-    }
 
+
+    }
 }
 
 private enum class AnimatedArcState {
