@@ -32,18 +32,7 @@ class MainActivity : ComponentActivity() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                    drawDeterminateProgressView(
-                        modifier = Modifier,
-                        progressColor = blue,
-                        progressBackgroundColor = light_blue,
-                        strokeWidth = 10.dp,
-                        strokeBackgroundWidth = 10.dp,
-                        progress = 60f,
-                        progressDirection = AnimationDirection.RIGHT,
-                        roundedBorder = false,
-                        durationInMilliSecond = 1300,
-                        defaultDiameter = 80.dp
-                    )
+                   infiniteProgressSample()
                 }
             }
         }
@@ -67,4 +56,35 @@ fun DefaultPreview() {
             defaultDiameter = 80.dp
         )
     }
+}
+
+@Composable
+fun infiniteProgressSample() {
+    drawInfiniteProgressView(
+        modifier = Modifier,
+        progressColor = blue,
+        progressBackgroundColor = light_blue,
+        strokeWidth = 10.dp,
+        strokeBackgroundWidth = 10.dp,
+        progressDirection = AnimationDirection.RIGHT,
+        roundedBorder = false,
+        durationInMilliSecond = 1300,
+        defaultDiameter = 180.dp
+    )
+}
+
+@Composable
+fun determinateProgressSample() {
+    drawDeterminateProgressView(
+        modifier = Modifier,
+        progressColor = blue,
+        progressBackgroundColor = light_blue,
+        strokeWidth = 10.dp,
+        strokeBackgroundWidth = 10.dp,
+        progress = 60f,
+        progressDirection = AnimationDirection.RIGHT,
+        roundedBorder = false,
+        durationInMilliSecond = 1300,
+        defaultDiameter = 80.dp
+    )
 }
