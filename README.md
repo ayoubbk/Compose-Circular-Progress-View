@@ -4,7 +4,7 @@
 
 CircularProgressView is an Android library that helps you to easily create a custom ProgressView.
 
-<img src="/preview/infinite_progress_view_preview.mp4" width="260" >
+<img src="/preview/infinite_progress_preview.gif" width="260" >
 
 ## Installation
 Add the jitpack.io repository:
@@ -29,12 +29,12 @@ dependencies {
 
 ## Feature
 
-- custom color for progress and background
-- configure progress width
-- configure progress background width
+- Custom color for progress and background
+- Configure progress width
+- Configure progress background width
 - Animation duration
 - Round or Square border
-- configure Progress direction: Left or Right
+- Configure Progress direction: Left or Right
 
 
 ## Usage
