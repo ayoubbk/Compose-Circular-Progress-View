@@ -29,7 +29,7 @@ fun drawInfiniteProgressView(
     progressDirection: AnimationDirection = AnimationDirection.RIGHT,
     roundedBorder: Boolean = false,
     durationInMilliSecond: Int = 800,
-    defaultDiameter: Dp = 80.dp
+    radius: Dp = 80.dp
 ) {
 
 
@@ -51,7 +51,7 @@ fun drawInfiniteProgressView(
 
     Canvas(
         modifier
-            .size(defaultDiameter)
+            .size(radius * 2)
     ) {
 
 

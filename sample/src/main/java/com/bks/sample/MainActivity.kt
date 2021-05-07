@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                   infiniteProgressSample()
+                    determinateProgressSample()
                 }
             }
         }
@@ -53,7 +53,7 @@ fun DefaultPreview() {
             progressDirection = AnimationDirection.RIGHT,
             roundedBorder = false,
             durationInMilliSecond = 1300,
-            defaultDiameter = 80.dp
+            radius = 80.dp
         )
     }
 }
@@ -69,7 +69,7 @@ fun infiniteProgressSample() {
         progressDirection = AnimationDirection.RIGHT,
         roundedBorder = false,
         durationInMilliSecond = 1300,
-        defaultDiameter = 180.dp
+        radius = 80.dp
     )
 }
 
@@ -81,10 +81,11 @@ fun determinateProgressSample() {
         progressBackgroundColor = light_blue,
         strokeWidth = 10.dp,
         strokeBackgroundWidth = 10.dp,
-        progress = 60f,
+        progress = 80f,
         progressDirection = AnimationDirection.RIGHT,
-        roundedBorder = false,
-        durationInMilliSecond = 1300,
-        defaultDiameter = 80.dp
+        roundedBorder = true,
+        durationInMilliSecond = 5000,
+        startDelay = 1000,
+        radius = 80.dp
     )
 }

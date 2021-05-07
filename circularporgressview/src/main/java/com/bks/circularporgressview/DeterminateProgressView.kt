@@ -2,10 +2,14 @@ package com.bks.circularporgressview
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.MaterialTheme.typography
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -13,8 +17,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bks.circularporgressview.ui.theme.blue
 import com.bks.circularporgressview.ui.theme.light_blue
 
@@ -42,7 +49,8 @@ fun drawDeterminateProgressView(
     progressDirection: AnimationDirection = AnimationDirection.RIGHT,
     roundedBorder: Boolean = true,
     durationInMilliSecond: Int = 2000,
-    defaultDiameter: Dp = 140.dp
+    startDelay: Int = 1000,
+    radius: Dp = 80.dp
 ) {
 
     val stroke = with(LocalDensity.current) {
@@ -63,7 +71,8 @@ fun drawDeterminateProgressView(
         transitionSpec = {
             tween(
                 durationMillis = durationInMilliSecond,
-                easing = LinearEasing
+                easing = LinearEasing,
+                delayMillis = startDelay
             )
         }
     ) { state ->
@@ -78,45 +87,60 @@ fun drawDeterminateProgressView(
         }
     }
 
-    Canvas(
-        modifier.size(defaultDiameter)
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.size(radius * 2)
     ) {
+        Canvas(
+            modifier.size(radius * 2)
+        ) {
 
-        // tips to animated determinate progress bar : ProgressIndicatorDefaults.ProgressAnimationSpec
+            // tips to animated determinate progress bar : ProgressIndicatorDefaults.ProgressAnimationSpec
 
-        val higherStrokeWidth =
-            if (stroke.width > strokeBackground.width) stroke.width else strokeBackground.width
-        val radius = (size.minDimension - higherStrokeWidth) / 2
-        val halfSize = size / 2.0f
-        val topLeft = Offset(
-            halfSize.width - radius,
-            halfSize.height - radius
-        )
-        val size = Size(radius * 2, radius * 2)
-        val sweep = progress * 360 / 100
+            val higherStrokeWidth =
+                if (stroke.width > strokeBackground.width) stroke.width else strokeBackground.width
+            val radius = (size.minDimension - higherStrokeWidth) / 2
+            val halfSize = size / 2.0f
+            val topLeft = Offset(
+                halfSize.width - radius,
+                halfSize.height - radius
+            )
+            val size = Size(radius * 2, radius * 2)
+            val sweep = progress * 360 / 100
 
-        drawArc(
-            startAngle = 0f,
-            sweepAngle = 360f,
-            color = progressBackgroundColor,
-            useCenter = false,
-            topLeft = topLeft,
-            size = size,
-            style = strokeBackground
-        )
+            drawArc(
+                startAngle = 0f,
+                sweepAngle = 360f,
+                color = progressBackgroundColor,
+                useCenter = false,
+                topLeft = topLeft,
+                size = size,
+                style = strokeBackground
+            )
 
-        drawArc(
+            drawArc(
+                color = progressColor,
+                startAngle = 270f,
+                sweepAngle = sweep,
+                useCenter = false,
+                topLeft = topLeft,
+                size = size,
+                style = stroke
+            )
+        }
+        
+        Text(
+            text = progress.toInt().toString(),
             color = progressColor,
-            startAngle = 270f,
-            sweepAngle = sweep,
-            useCenter = false,
-            topLeft = topLeft,
-            size = size,
-            style = stroke
+            fontSize = radius.value.sp / 2,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = FontFamily.Monospace,
+            style = typography.subtitle1
         )
-
-
     }
+
+
 }
 
 private enum class AnimatedArcState {

@@ -2,9 +2,9 @@
 
 [![](https://jitpack.io/v/ayoubbk/Compose-Circular-Progress-View.svg)](https://jitpack.io/#ayoubbk/Compose-Circular-Progress-View)
 
-CircularProgressView is an Android library that helps you to easily create a custom ProgressView.
+CircularProgressView is an Android library that helps you to easily create a custom CircularProgressView.
 
-<img src="/preview/infinite_progress_view_preview.gif" width="260" >
+<img src="/preview/infinite_progress_view_preview.gif" width="260" >&emsp;<img src="/preview/determinate-progress.gif" width="260" >
 
 ## Installation
 Add the jitpack.io repository:
@@ -39,6 +39,7 @@ dependencies {
 
 ## Usage
 
+Infinite CircularProgressView
 ```kotlin
 @Composable
 fun infiniteProgressSample() {
@@ -52,6 +53,26 @@ fun infiniteProgressSample() {
         roundedBorder = false,
         durationInMilliSecond = 1300,
         defaultDiameter = 80.dp
+    )
+}
+```
+
+Determinate CircularProgressView
+```kotlin
+@Composable
+fun determinateProgressSample() {
+    drawDeterminateProgressView(
+        modifier = Modifier,
+        progressColor = blue,
+        progressBackgroundColor = light_blue,
+        strokeWidth = 10.dp,
+        strokeBackgroundWidth = 10.dp,
+        progress = 80f,
+        progressDirection = AnimationDirection.RIGHT,
+        roundedBorder = true,
+        durationInMilliSecond = 5000,
+        startDelay = 1000,
+        radius = 80.dp
     )
 }
 ```
