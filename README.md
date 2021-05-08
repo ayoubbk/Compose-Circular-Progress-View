@@ -76,3 +76,7 @@ fun determinateProgressSample() {
     )
 }
 ```
+
+## Developed By
+
+[![Follow me](https://img.shields.io/badge/-twitter-white?logo=twitter)](https://twitter.com/AyoubBenKhemis)
