@@ -28,11 +28,12 @@ dependencies {
 ```
 
 ## Feature
-
+- Infinite or Determinate progress view
 - Custom color for progress and background
 - Configure progress width
 - Configure progress background width
-- Animation duration
+- Set animation duration
+- Set start delay for determinate progress view
 - Round or Square border
 - Configure Progress direction: Left or Right
 
