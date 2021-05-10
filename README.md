@@ -44,7 +44,7 @@ Infinite CircularProgressView
 ```kotlin
 @Composable
 fun infiniteProgressSample() {
-    drawInfiniteProgressView(
+    InfiniteProgressView(
         modifier = Modifier,
         progressColor = blue,
         progressBackgroundColor = light_blue,
@@ -62,7 +62,7 @@ Determinate CircularProgressView
 ```kotlin
 @Composable
 fun determinateProgressSample() {
-    drawDeterminateProgressView(
+    DeterminateProgressView(
         modifier = Modifier,
         progressColor = blue,
         progressBackgroundColor = light_blue,
@@ -73,7 +73,8 @@ fun determinateProgressSample() {
         roundedBorder = true,
         durationInMilliSecond = 5000,
         startDelay = 1000,
-        radius = 80.dp
+        radius = 80.dp,
+        waveAnimation = true
     )
 }
 ```
