@@ -98,7 +98,7 @@ fun DeterminateProgressView(
     )
 
     val animatedColor by animatedCircle.animateColor(
-        initialValue = progressBackgroundColor,
+        initialValue = progressBackgroundColor.copy(0.5f),
         targetValue = progressColor.copy(0.8f),
         animationSpec = infiniteRepeatable(tween(2000), RepeatMode.Reverse)
     )
@@ -158,7 +158,7 @@ fun DeterminateProgressView(
         }
         
         Text(
-            text = progress.toInt().toString(),
+            text = progress.toInt().toString() + "%",
             color = progressColor,
             fontSize = radius.value.sp / 2,
             fontWeight = FontWeight.SemiBold,

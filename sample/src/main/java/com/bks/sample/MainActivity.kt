@@ -82,12 +82,12 @@ fun determinateProgressSample() {
         progressBackgroundColor = light_blue,
         strokeWidth = 10.dp,
         strokeBackgroundWidth = 10.dp,
-        progress = 80f,
+        progress = 100f,
         progressDirection = AnimationDirection.RIGHT,
         roundedBorder = true,
         durationInMilliSecond = 10000,
         startDelay = 1000,
         radius = 80.dp,
-        waveAnimation = false
+        waveAnimation = true
     )
 }
