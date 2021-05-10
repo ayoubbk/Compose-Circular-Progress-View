@@ -1,14 +1,13 @@
 package com.bks.circularporgressview
 
+import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -39,7 +38,7 @@ import com.bks.circularporgressview.ui.theme.light_blue
  *
  */
 @Composable
-fun drawDeterminateProgressView(
+fun DeterminateProgressView(
     modifier: Modifier = Modifier,
     progressColor: Color = blue,
     progressBackgroundColor: Color = light_blue,
@@ -50,7 +49,8 @@ fun drawDeterminateProgressView(
     roundedBorder: Boolean = true,
     durationInMilliSecond: Int = 2000,
     startDelay: Int = 1000,
-    radius: Dp = 80.dp
+    radius: Dp = 80.dp,
+    waveAnimation: Boolean = true
 ) {
 
     val stroke = with(LocalDensity.current) {
@@ -61,13 +61,17 @@ fun drawDeterminateProgressView(
         Stroke(width = strokeBackgroundWidth.toPx())
     }
 
+    val strokeReverse = Stroke(strokeBackground.width / 4)
+
     val currentState = remember {
         MutableTransitionState(AnimatedArcState.START)
             .apply { targetState = AnimatedArcState.END }
     }
-    val transition = updateTransition(currentState)
+    val animatedProgress = updateTransition(currentState)
+    var isFinished by remember { mutableStateOf(false) }
+    val animatedCircle = rememberInfiniteTransition()
 
-    val progress by transition.animateFloat(
+    val progress by animatedProgress.animateFloat(
         transitionSpec = {
             tween(
                 durationMillis = durationInMilliSecond,
@@ -87,6 +91,22 @@ fun drawDeterminateProgressView(
         }
     }
 
+    val animatedReverse by animatedCircle.animateFloat(
+        initialValue = 1.40f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(2000), RepeatMode.Reverse)
+    )
+
+    val animatedColor by animatedCircle.animateColor(
+        initialValue = progressBackgroundColor,
+        targetValue = progressColor.copy(0.8f),
+        animationSpec = infiniteRepeatable(tween(2000), RepeatMode.Reverse)
+    )
+
+    DisposableEffect(Unit) {
+        isFinished = animatedProgress.currentState == animatedProgress.targetState
+        onDispose {}
+    }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -95,8 +115,6 @@ fun drawDeterminateProgressView(
         Canvas(
             modifier.size(radius * 2)
         ) {
-
-            // tips to animated determinate progress bar : ProgressIndicatorDefaults.ProgressAnimationSpec
 
             val higherStrokeWidth =
                 if (stroke.width > strokeBackground.width) stroke.width else strokeBackground.width
@@ -108,6 +126,7 @@ fun drawDeterminateProgressView(
             )
             val size = Size(radius * 2, radius * 2)
             val sweep = progress * 360 / 100
+            isFinished = animatedProgress.currentState == animatedProgress.targetState
 
             drawArc(
                 startAngle = 0f,
@@ -118,6 +137,14 @@ fun drawDeterminateProgressView(
                 size = size,
                 style = strokeBackground
             )
+
+            if(waveAnimation && !isFinished) {
+                drawCircle(
+                    color = animatedColor,
+                    style = strokeReverse,
+                    radius = radius * animatedReverse,
+                )
+            }
 
             drawArc(
                 color = progressColor,

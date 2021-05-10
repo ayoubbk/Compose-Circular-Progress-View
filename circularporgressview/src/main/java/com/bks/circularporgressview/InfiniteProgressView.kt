@@ -20,7 +20,7 @@ import com.bks.circularporgressview.ui.theme.light_blue
 
 
 @Composable
-fun drawInfiniteProgressView(
+fun InfiniteProgressView(
     modifier: Modifier = Modifier,
     progressColor: Color = blue,
     progressBackgroundColor: Color = light_blue,

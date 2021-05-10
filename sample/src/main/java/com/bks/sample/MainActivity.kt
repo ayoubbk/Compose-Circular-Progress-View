@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bks.circularporgressview.AnimationDirection
-import com.bks.circularporgressview.drawDeterminateProgressView
-import com.bks.circularporgressview.drawInfiniteProgressView
+import com.bks.circularporgressview.DeterminateProgressView
+import com.bks.circularporgressview.InfiniteProgressView
 import com.bks.circularporgressview.ui.theme.blue
 import com.bks.circularporgressview.ui.theme.light_blue
 import com.bks.sample.ui.theme.CircularProgressViewTheme
@@ -44,7 +44,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     CircularProgressViewTheme {
-        drawInfiniteProgressView(
+
+        InfiniteProgressView(
             modifier = Modifier,
             progressColor = blue,
             progressBackgroundColor = light_blue,
@@ -60,7 +61,7 @@ fun DefaultPreview() {
 
 @Composable
 fun infiniteProgressSample() {
-    drawInfiniteProgressView(
+    InfiniteProgressView(
         modifier = Modifier,
         progressColor = blue,
         progressBackgroundColor = light_blue,
@@ -75,7 +76,7 @@ fun infiniteProgressSample() {
 
 @Composable
 fun determinateProgressSample() {
-    drawDeterminateProgressView(
+    DeterminateProgressView(
         modifier = Modifier,
         progressColor = blue,
         progressBackgroundColor = light_blue,
@@ -84,8 +85,9 @@ fun determinateProgressSample() {
         progress = 80f,
         progressDirection = AnimationDirection.RIGHT,
         roundedBorder = true,
-        durationInMilliSecond = 5000,
+        durationInMilliSecond = 10000,
         startDelay = 1000,
-        radius = 80.dp
+        radius = 80.dp,
+        waveAnimation = false
     )
 }
